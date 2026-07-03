@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sale_order_form_searchbar" model="ir.ui.view">
+        <field name="name">sale.order.form.searchbar.test</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='order_line']" position="attributes">
+
+                <attribute name="widget">searchable_x2many</attribute>
+
+                <attribute name="options">
+                    {
+                        'placeholder': 'Search product...',
+                        'search_columns': [0, 1, 2]
+                    }
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
