@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="x2many_searchbar.SearchableX2ManyField" owl="1">
+        <div t-attf-class="o_field_x2many o_field_x2many_{{viewMode}}">
+            <!-- Live search bar -->
+            <div class="o_x2many_searchbar d-flex align-items-center justify-content-center gap-2 pt-1 mb-2">
+                <div class="input-group input-group-sm" style="max-width: 320px;">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="fa fa-search text-muted"/>
+                    </span>
+                    <input
+                        type="text"
+                        class="form-control border-start-0"
+                        t-att-placeholder="props.searchPlaceholder || 'Search…'"
+                        t-on-input="onSearchInput"
+                        t-att-value="searchState.term"
+                    />
+                    <button t-if="searchState.term" type="button"
+                            class="btn btn-outline-secondary btn-sm"
+                            t-on-click="clearSearch"
+                            title="Clear search">
+                        <i class="fa fa-times"/>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Standard Odoo 16 control panel (Add button + pager) -->
+            <div class="o_x2m_control_panel">
+                <t t-if="displayAddButton">
+                    <div class="o_cp_buttons" role="toolbar" aria-label="Control panel buttons" t-ref="buttons">
+                        <div>
+                            <button type="button" class="btn btn-secondary o-kanban-button-new" title="Create record" accesskey="c" t-on-click="() => this.onAdd()">
+                                <t t-esc="addButtonText"/>
+                            </button>
+                        </div>
+                    </div>
+                </t>
+                <div class="o_cp_pager" role="search">
+                    <Pager t-if="props.value.count > props.value.limit" t-props="pagerProps"/>
+                </div>
+            </div>
+
+            <!-- List/Kanban renderer wrapped in a ref so the filter can reach table rows -->
+            <div t-ref="searchable_table">
+                <ListRenderer t-if="viewMode === 'list'" t-props="rendererProps"/>
+                <KanbanRenderer t-elif="viewMode" t-props="rendererProps"/>
+            </div>
+        </div>
+    </t>
+</templates>
