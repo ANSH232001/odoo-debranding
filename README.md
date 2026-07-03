@@ -1,0 +1,1 @@
+# odoo-19-to-16-widget-debranding
