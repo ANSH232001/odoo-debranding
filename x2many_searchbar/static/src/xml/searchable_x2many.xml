@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+    <t t-name="x2many_searchbar.SearchableX2ManyField">
+        <div t-att-class="className">
+            <!-- Live search bar -->
+            <div class="o_x2many_searchbar d-flex align-items-center justify-content-center gap-2 pt-1 mb-2">
+                <div class="input-group input-group-sm" style="max-width: 320px;">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="fa fa-search text-muted"/>
+                    </span>
+                    <input
+                        type="text"
+                        class="form-control border-start-0"
+                        t-att-placeholder="props.searchPlaceholder || 'Search…'"
+                        t-on-input="onSearchInput"
+                        t-att-value="searchState.term"
+                    />
+                    <button t-if="searchState.term" type="button"
+                            class="btn btn-outline-secondary btn-sm"
+                            t-on-click="clearSearch"
+                            title="Clear search">
+                        <i class="fa fa-times"/>
+                    </button>
+                </div>
+            </div>
+            <!-- Standard pager (shown when records exceed the page limit) -->
+            <div class="o_x2m_control_panel d-empty-none mb-2">
+                <div t-if="props.record.data[props.name].count > props.record.data[props.name].limit"
+                     class="o_cp_pager" role="search">
+                    <Pager t-props="pagerProps"/>
+                </div>
+            </div>
+            <!-- List renderer wrapped in a ref so the filter can reach table rows -->
+            <div t-ref="searchable_table">
+                <ListRenderer t-if="props.viewMode === 'list'" t-props="rendererProps"/>
+                <KanbanRenderer t-elif="props.viewMode" t-props="rendererProps"/>
+            </div>
+        </div>
+    </t>
+</templates>
