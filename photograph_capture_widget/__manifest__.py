@@ -1,6 +1,6 @@
 {
     'name': 'Photograph Capture Widget',
-    'version': '16.0.1.0.0',
+    'version': '19.0.1.0.0',
     'summary': 'Reusable camera/photograph capture OWL field widget for binary image fields',
     'category': 'Technical',
     'author': 'Ranthox Pty Ltd',

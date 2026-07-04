@@ -100,4 +100,8 @@ class PhotographCaptureWidget extends Component {
     }
 }
 
-registry.category("fields").add("photograph_capture", PhotographCaptureWidget);
+registry.category("fields").add("photograph_capture", {
+    component: PhotographCaptureWidget,
+    displayName: "Photograph Capture",
+    supportedTypes: ["binary"],
+});
