@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='payment_term_id']" position="after">
-                    <field name="excel_file" widget="binary"/>
+                    <field name="excel_file" widget="excel_editor"/>
                     <field name="excel_file_filename" invisible="1"/>
                 </xpath>
             </field>
