@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="photograph_capture_widget.CameraCapture">
+        <!-- Fixed overlay backdrop -->
+        <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+             style="z-index: 9999; background: rgba(0,0,0,0.85);">
+            <div class="bg-gray rounded p-3 d-flex flex-column align-items-center"
+                 style="max-width: 90vw; max-height: 90vh;">
+
+                <t t-if="state.error">
+                    <div class="alert alert-danger mb-3" t-esc="state.error"/>
+                </t>
+                <t t-else="">
+                    <video t-ref="video" autoplay="1" playsinline="1"
+                           style="max-width: 100%; max-height: 60vh; border-radius: 4px;"/>
+                    <canvas t-ref="canvas" class="d-none"/>
+                </t>
+
+                <div class="d-flex gap-2 mt-3 justify-content-center flex-wrap">
+                    <button class="btn btn-primary" t-on-click="capturePhoto" t-if="!state.error">
+                        <i class="fa fa-camera me-1"/> Capture
+                    </button>
+                    <button class="btn btn-secondary" t-on-click="switchCamera" t-if="!state.error">
+                        <i class="fa fa-refresh me-1"/> Switch Camera
+                    </button>
+                    <button class="btn btn-danger" t-on-click="cancel">
+                        <i class="fa fa-times me-1"/> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>
