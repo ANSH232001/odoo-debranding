@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="photograph_capture_widget.PhotographCaptureWidget">
+        <div class="o_photograph_capture_widget" t-att-style="containerStyle">
+            <CameraCapture t-if="state.isCapturing"
+                onCapture.bind="onCapture"
+                onClose.bind="onClose"/>
+
+            <!-- Lightbox overlay -->
+            <div t-if="state.showLightbox"
+                 class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+                 style="z-index: 9999; background: rgba(0,0,0,0.85);"
+                 t-on-click="closeLightbox">
+                <button class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                        style="font-size: 1.5rem;"
+                        t-on-click="closeLightbox"/>
+                <img t-att-src="state.preview"
+                     style="max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 4px;"
+                     t-on-click.stop=""/>
+            </div>
+
+            <div t-if="state.preview" class="o_photograph_preview mb-2">
+                <img t-att-src="state.preview"
+                     class="o_photograph_img"
+                     t-att-style="previewImgStyle"
+                     t-on-click="openLightbox"/>
+                <div t-if="!isReadonly" class="mt-1">
+                    <button class="btn btn-sm btn-danger" t-on-click="clearPhoto">
+                        <i class="fa fa-trash me-1"/> Remove
+                    </button>
+                </div>
+            </div>
+
+            <div t-if="!isReadonly" class="d-flex gap-2">
+                <button class="btn btn-secondary" t-on-click="openCamera">
+                    <i class="fa fa-camera me-1"/>
+                    <t t-if="state.preview">Retake Photo</t>
+                    <t t-else="">Take Photo</t>
+                </button>
+                <button class="btn btn-secondary" t-on-click="triggerUpload">
+                    <i class="fa fa-upload me-1"/>
+                    <t t-if="state.preview">Replace Upload</t>
+                    <t t-else="">Upload Photo</t>
+                </button>
+                <input t-ref="uploadInput"
+                       type="file"
+                       accept="image/*"
+                       class="d-none"
+                       t-on-change="onUpload"/>
+            </div>
+        </div>
+    </t>
+
+</templates>
