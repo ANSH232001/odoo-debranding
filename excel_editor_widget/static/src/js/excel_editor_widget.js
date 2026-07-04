@@ -827,9 +827,10 @@ class ExcelEditorWidget extends Component {
     }
 
 }
+registry.category("fields").add("excel_editor", excelEditorField);
 
-registry.category("fields").add("excel_editor", {
-    component:      ExcelEditorWidget,
-    displayName:    "Excel Editor",
-    supportedTypes: ["binary"],
-});
+// registry.category("fields").add("excel_editor", {
+//     component:      ExcelEditorWidget,
+//     displayName:    "Excel Editor",
+//     supportedTypes: ["binary"],
+// });
